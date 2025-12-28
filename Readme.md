@@ -65,7 +65,8 @@ Creates a new task after validating the request body using Zod.
 
 ### 📄 GET All Tasks
 
-**Endpoint**
+**Endpoint**git checkout master
+
 
 ```
 GET /tasks
