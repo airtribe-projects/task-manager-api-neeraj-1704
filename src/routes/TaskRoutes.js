@@ -1,56 +1,77 @@
-import express from "express";
+// import express from "express";
+
+// import { validate } from "../middleware/validate.js";
+// import { createTaskSchema } from "../validations/taskValidation.js";
+
 // import {
 //     createTask,
 //     getAllTasks,
 //     getTaskById,
+//     getTasksByPriority,
 //     updateTaskById,
-//     deleteTaskById,
+//     deleteTaskById
+
 // } from "../controller/TaskController.js";
-import { validate } from "../middleware/validate.js";
-import { createTaskSchema } from "../validations/taskValidation.js";
 
-import {
-    createTask,
-    getAllTasks,
-    getTaskById,
-    updateTaskById,
-
-
-    deleteTaskById,
-    getTasks,
-    getTasksByPriority,
-    createTask,
-    
-} from "../controller/TaskController.js";
-
-/**
- * @swagger
- * /api/v1/tasks:
- *   post
-**/
+// /**
+//  * @swagger
+//  * /api/v1/tasks:
+//  *   post
+// **/
 // const routes = express.Router();
 
 // routes.route("/tasks")
 //     .post(validate(createTaskSchema), createTask)
 //     .get(getAllTasks);
 
-// routes.get("/tasks/:id", getTaskById)
-//     .put("/tasks/:id", updateTaskById)
-//     .delete("/tasks/:id", deleteTaskById);
+// routes.get("/tasks/priority/:level", getTasksByPriority);
 
+// routes.route("/tasks/:id")
+//     .get(getTaskById)
+//     .put(updateTaskById)
+//     .delete(deleteTaskById);
 
+   
 // export default routes;
 
 
+import express from "express";
+
+import { validate } from "../middleware/validate.js";
+import { createTaskSchema } from "../validations/taskValidation.js";
+
+import {
+  createTask,
+  getAllTasks,                
+  getTaskById,
+  getTasksByPriority,
+  updateTaskById,
+  deleteTaskById,
+} from "../controller/TaskController.js";
+
 const routes = express.Router();
 
-routes.route("/tasks")
-    .post(validate(createTaskSchema), createTask)
-    .get(getTasks);
+/**
+ * TASK ROUTES
+ * Base path: /api/v1
+ */
 
-routes.get("/tasks/:id", getTaskById)
-    .put("/tasks/:id", updateTaskById)
-    .delete("/tasks/:id", deleteTaskById);
+// CREATE + GET ALL (filter & sort supported)
+routes
+  .route("/tasks")
+  .post(validate(createTaskSchema), createTask)
+  .get(getAllTasks);
 
+// IMPORTANT: specific routes FIRST
+routes.get("/tasks/priority/:level", getTasksByPriority);
+
+// dynamic routes LAST
+routes
+  .route("/tasks/:id")
+  .get(getTaskById)
+  .put(updateTaskById)
+  .delete(deleteTaskById);
 
 export default routes;
+
+

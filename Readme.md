@@ -75,6 +75,11 @@ Retrieves all tasks in memory.
 
 ---
 
+Based on the date filer the task
+
+http://localhost:3000/api/v1/tasks?sort=asc
+http://localhost:3000/api/v1/tasks?sort=desc 
+
 ### 📄 GET Task by ID
 
 **Endpoint**
